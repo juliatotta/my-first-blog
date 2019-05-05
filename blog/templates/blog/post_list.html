@@ -1,18 +1,14 @@
-<html>
-<head>
-  <title>Blog JuliaTotta</title>
+{% extends 'blog/base.html' %}
 
-</head>
-<body>
-  <div>
-    <h2>Blog feito através do tutorial <a href="https://tutorial.djangogirls.org/">Blog Django Girls</a></h2>
-  </div>
-  {% for post in posts %}
-      <div>
-          <p>publicado em: {{ post.published_date }}</p>
-          <h1><a href="">{{ post.title }}</a></h1>
-          <p>{{ post.text|linebreaksbr }}</p>
-      </div>
-  {% endfor %}
-</body>
-</html>
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
